@@ -1,0 +1,6 @@
+lib/
+test-result/
+tmp/
+*.iml
+*.ipr
+*.iws
