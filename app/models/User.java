@@ -12,7 +12,8 @@ import java.util.List;
 @Table(name = "usr")
 public class User extends Model {
 
-
+  public String name;
+  public String mail;
 
   @OneToMany
   List<MatchBet> matchBets = new ArrayList<MatchBet>();
