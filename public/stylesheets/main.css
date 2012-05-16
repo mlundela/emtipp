@@ -1,0 +1,25 @@
+.kortInput {
+    width: 20px;
+}
+
+.teamColumn {
+     width: 80px;
+ }
+
+.goalsColumn {
+     width: 20px;
+ }
+
+.floatLeft {
+    float: left;
+    margin-left: 4px;
+}
+
+.floatRight {
+    float: right;
+    margin-right: 4px;
+}
+
+.gruppe {
+    padding-top: 10px;
+}

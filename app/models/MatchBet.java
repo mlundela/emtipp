@@ -9,13 +9,18 @@ import javax.persistence.ManyToOne;
 public class MatchBet extends Model {
 
   @ManyToOne
-  public User user;
+  public UserBet user;
 
   @ManyToOne
   public Match match;
 
-  public int homeTeamScore;
-  public int awayTeamScore;
+  public int homeTeamScore = 0;
+  public int awayTeamScore = 0;
+
+  public MatchBet(UserBet user, Match match) {
+    this.match = match;
+    this.user = user;
+  }
 
 
   public int getScore() {

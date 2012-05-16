@@ -1,4 +1,7 @@
+package jobs;
+
 import models.Match;
+import models.TGroup;
 import models.Team;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -29,13 +32,19 @@ public class Bootstrap extends Job {
 
         String homeTeamName = element.select(".sd_fixtures_home_flag a").text();
         String awayTeamName = element.select(".sd_fixtures_away_flag a").text();
-        String group = element.select(".sd_fixtures_tournament span").text().substring(7, 8);
+        String groupName = element.select(".sd_fixtures_tournament span").text().substring(7, 8);
 
-        Team homeTeam = Team.getTeam(homeTeamName, group);
-        Team awayTeam = Team.getTeam(awayTeamName, group);
+        TGroup group = TGroup.findOrCreateGroup(groupName);
+        Team homeTeam = Team.findOrCreateTeam(homeTeamName);
+        Team awayTeam = Team.findOrCreateTeam(awayTeamName);
+        group.teams.add(homeTeam);
+        group.teams.add(awayTeam);
 
         Match match = new Match(homeTeam, awayTeam);
         match.save();
+
+        group.matches.add(match);
+        group.save();
 
         Logger.info(match.toString());
       }

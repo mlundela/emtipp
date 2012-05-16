@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 public class TeamBet extends Model {
 
   @ManyToOne
-  public User user;
+  public UserBet user;
 
   @ManyToOne
   public Team team;

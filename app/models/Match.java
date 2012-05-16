@@ -24,6 +24,6 @@ public class Match extends Model {
 
   @Override
   public String toString() {
-    return "Match{ group: " + homeTeam.tGroup + " " + homeTeam.name + " - " + awayTeam.name + " " + homeTeamScore + "-" + awayTeamScore + '}';
+    return "Match{" + homeTeam.name + " - " + awayTeam.name + " " + homeTeamScore + "-" + awayTeamScore + '}';
   }
 }

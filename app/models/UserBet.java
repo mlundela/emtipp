@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Email;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -10,14 +11,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "usr")
-public class User extends Model {
+public class UserBet extends Model {
 
+  public String name;
 
+  @Email
+  public String email;
 
   @OneToMany
-  List<MatchBet> matchBets = new ArrayList<MatchBet>();
+  public List<MatchBet> matchBets = new ArrayList<MatchBet>();
 
   @OneToMany
-  List<TeamBet> teamBets = new ArrayList<TeamBet>();
-
+  public List<TeamBet> teamBets = new ArrayList<TeamBet>();
 }
