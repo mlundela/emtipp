@@ -4,6 +4,9 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /bets/{<[0-9]+>id}                      UserBets.get
+GET     /bets/new                               UserBets.create
+POST    /bets/new                               UserBets.save
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

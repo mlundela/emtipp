@@ -8,15 +8,14 @@ import javax.persistence.Entity;
 public class Team extends Model {
 
   public String name;
-  public Ranking ranking;
+  public Ranking ranking = Ranking.GROUP_PLAY;
 
   public Team(String name) {
     this.name = name;
-    this.ranking = Ranking.GROUP_PLAY;
   }
 
-  public static Team getTeam(String name) {
-    Team team = Team.find("name = ?", name).first();
+  public static Team findOrCreateTeam(String name) {
+    Team team = find("name = ?", name).first();
     if (team == null) {
       team = new Team(name);
       team.save();

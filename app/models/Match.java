@@ -14,14 +14,12 @@ public class Match extends Model {
   @ManyToOne
   public Team awayTeam;
 
-  public int homeTeamScore;
-  public int awayTeamScore;
+  public int homeTeamScore = 0;
+  public int awayTeamScore = 0;
 
   public Match(Team homeTeam, Team awayTeam) {
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
-    homeTeamScore = 0;
-    awayTeamScore = 0;
   }
 
   @Override
