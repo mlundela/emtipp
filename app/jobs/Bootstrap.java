@@ -1,8 +1,9 @@
 package jobs;
 
+import models.Group;
 import models.Match;
-import models.TGroup;
 import models.Team;
+import models.User;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,6 +21,12 @@ public class Bootstrap extends Job {
 
       Logger.info("INIT DATABASE");
 
+      Logger.info("Create test user");
+      User user = new User();
+      user.email = "lundeland@gmail.com";
+      user.save();
+
+
       Document doc = Jsoup.connect("http://www.altomfotball.no/element.do?cmd=tournament&tournamentId=6270").get();
       Elements elements = doc.select(".sd_fixtures tr");
 
@@ -34,13 +41,17 @@ public class Bootstrap extends Job {
         String awayTeamName = element.select(".sd_fixtures_away_flag a").text();
         String groupName = element.select(".sd_fixtures_tournament span").text().substring(7, 8);
 
-        TGroup group = TGroup.findOrCreateGroup(groupName);
+        Group group = Group.findOrCreateGroup(groupName);
         Team homeTeam = Team.findOrCreateTeam(homeTeamName);
         Team awayTeam = Team.findOrCreateTeam(awayTeamName);
-        group.teams.add(homeTeam);
-        group.teams.add(awayTeam);
+        if (!group.teams.contains(homeTeam)) {
+          group.teams.add(homeTeam);
+        }
+        if (!group.teams.contains(awayTeam)) {
+          group.teams.add(awayTeam);
+        }
 
-        Match match = new Match(homeTeam, awayTeam);
+        Match match = new Match(homeTeam, awayTeam, group);
         match.save();
 
         group.matches.add(match);

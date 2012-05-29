@@ -9,6 +9,9 @@ import javax.persistence.ManyToOne;
 public class Match extends Model {
 
   @ManyToOne
+  public Group group;
+
+  @ManyToOne
   public Team homeTeam;
 
   @ManyToOne
@@ -17,13 +20,14 @@ public class Match extends Model {
   public int homeTeamScore = 0;
   public int awayTeamScore = 0;
 
-  public Match(Team homeTeam, Team awayTeam) {
+  public Match(Team homeTeam, Team awayTeam, Group group) {
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
+    this.group = group;
   }
 
   @Override
   public String toString() {
-    return "Match{" + homeTeam.name + " - " + awayTeam.name + " " + homeTeamScore + "-" + awayTeamScore + '}';
+    return "GMatch{" + homeTeam.name + " - " + awayTeam.name + " " + homeTeamScore + "-" + awayTeamScore + '}';
   }
 }
