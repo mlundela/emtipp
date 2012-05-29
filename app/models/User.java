@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Email;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import java.util.List;
 @Table(name = "usr")
 public class User extends Model {
 
+  @Email
+  public String email;
 
 
   @OneToMany
