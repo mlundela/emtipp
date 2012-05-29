@@ -1,14 +1,14 @@
 .kortInput {
-    width: 20px;
+    width: 40px;
 }
 
 .teamColumn {
-     width: 80px;
- }
+    width: 80px;
+}
 
 .goalsColumn {
-     width: 20px;
- }
+    width: 20px;
+}
 
 .floatLeft {
     float: left;
@@ -22,4 +22,8 @@
 
 .gruppe {
     padding-top: 10px;
+}
+
+button {
+    width: 80px;
 }

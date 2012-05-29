@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usr")
-public class UserBet extends Model {
+public class User extends Model {
 
   public String name;
 
