@@ -1,11 +1,8 @@
 package controllers;
 
 import models.Bet;
-import models.Group;
 import models.Team;
 import play.mvc.Controller;
-
-import java.util.List;
 
 public class Bets extends Controller {
 
@@ -17,31 +14,33 @@ public class Bets extends Controller {
 
   public static void edit(Long id) {
     Bet bet = Bet.findById(id);
+    bet.updateTables();
     renderTemplate("Bets/create.html", bet);
   }
 
   public static void save(Bet bet) {
 
-    // todo: sjekk at q1-q8 er riktig, og viss ikkje oppdater finaler.
+    // sjekk at q1-q8 er riktig, og viss ikkje oppdater finaler.
 
-    List<Group> tables = bet.tables();
-    Team q1 = tables.get(0).table().get(0);
-    Team q2 = tables.get(1).table().get(1);
-    Team q3 = tables.get(1).table().get(0);
-    Team q4 = tables.get(0).table().get(1);
-    Team q5 = tables.get(2).table().get(2);
-    Team q6 = tables.get(3).table().get(3);
-    Team q7 = tables.get(3).table().get(2);
-    Team q8 = tables.get(2).table().get(3);
+    bet.updateTables();
 
-    if (bet.q1 != q1 ||
-        bet.q2 != q2 ||
-        bet.q3 != q3 ||
-        bet.q4 != q4 ||
-        bet.q5 != q5 ||
-        bet.q6 != q6 ||
-        bet.q7 != q7 ||
-        bet.q8 != q8) {
+    Team q1 = bet.tables.get(0).table().get(0);
+    Team q2 = bet.tables.get(1).table().get(1);
+    Team q3 = bet.tables.get(1).table().get(0);
+    Team q4 = bet.tables.get(0).table().get(1);
+    Team q5 = bet.tables.get(2).table().get(0);
+    Team q6 = bet.tables.get(3).table().get(1);
+    Team q7 = bet.tables.get(3).table().get(0);
+    Team q8 = bet.tables.get(2).table().get(1);
+
+    if (!bet.q1.id.equals(q1.id) ||
+        !bet.q2.id.equals(q2.id) ||
+        !bet.q3.id.equals(q3.id) ||
+        !bet.q4.id.equals(q4.id) ||
+        !bet.q5.id.equals(q5.id) ||
+        !bet.q6.id.equals(q6.id) ||
+        !bet.q7.id.equals(q7.id) ||
+        !bet.q8.id.equals(q8.id)) {
 
       bet.updateFinals();
     }

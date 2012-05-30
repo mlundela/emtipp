@@ -2,10 +2,7 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,16 +42,19 @@ public class Bet extends Model {
   @OneToOne
   public Team winner;
 
+  @Transient
+  public List<Group> tables;
+
   public void init() {
     for (Match match : Match.<Match>findAll()) {
       matchBets.add(new MatchBet(match));
     }
 
+    updateTables();
     updateFinals();
   }
 
-
-  public List<Group> tables() {
+  public void updateTables() {
     List<Group> out = Group.findAll();
     for (MatchBet matchBet : matchBets) {
       for (Group group : out) {
@@ -73,20 +73,20 @@ public class Bet extends Model {
         }
       }
     }
-    return out;
+    tables = new ArrayList<Group>(out);
   }
 
 
   public void updateFinals() {
-    List<Group> tables = tables();
+
     q1 = tables.get(0).table().get(0);
     q2 = tables.get(1).table().get(1);
     q3 = tables.get(1).table().get(0);
     q4 = tables.get(0).table().get(1);
-    q5 = tables.get(2).table().get(2);
-    q6 = tables.get(3).table().get(3);
-    q7 = tables.get(3).table().get(2);
-    q8 = tables.get(2).table().get(3);
+    q5 = tables.get(2).table().get(0);
+    q6 = tables.get(3).table().get(1);
+    q7 = tables.get(3).table().get(0);
+    q8 = tables.get(2).table().get(1);
 
     s1 = q1;
     s2 = q5;
