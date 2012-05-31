@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 public class Bet extends Model {
 
+  @OrderBy("match desc ")
   @OneToMany(cascade = CascadeType.ALL)
   public List<MatchBet> matchBets = new ArrayList<MatchBet>();
   @OneToOne
@@ -97,5 +98,28 @@ public class Bet extends Model {
     f2 = s3;
 
     winner = s1;
+  }
+
+  public boolean tablesChanged() {
+
+    updateTables();
+
+    Team gg1 = tables.get(0).table().get(0);
+    Team qq2 = tables.get(1).table().get(1);
+    Team qq3 = tables.get(1).table().get(0);
+    Team qq4 = tables.get(0).table().get(1);
+    Team qq5 = tables.get(2).table().get(0);
+    Team qq6 = tables.get(3).table().get(1);
+    Team qq7 = tables.get(3).table().get(0);
+    Team qq8 = tables.get(2).table().get(1);
+
+    return !q1.id.equals(gg1.id) ||
+        !q2.id.equals(qq2.id) ||
+        !q3.id.equals(qq3.id) ||
+        !q4.id.equals(qq4.id) ||
+        !q5.id.equals(qq5.id) ||
+        !q6.id.equals(qq6.id) ||
+        !q7.id.equals(qq7.id) ||
+        !q8.id.equals(qq8.id);
   }
 }

@@ -6,8 +6,8 @@
     width: 80px;
 }
 
-.goalsColumn {
-    width: 20px;
+.goals {
+    width: 40px;
 }
 
 .floatLeft {
@@ -24,6 +24,6 @@
     padding-top: 10px;
 }
 
-button {
+a.btn {
     width: 80px;
 }

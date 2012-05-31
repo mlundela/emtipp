@@ -15,29 +15,30 @@
         var q7 = $('#q7');
         var q8 = $('#q8');
 
-        $('#s1').html(q1.attr('disabled') ? q1.html() : q2.html());
-        $('#s3').html(q3.attr('disabled') ? q3.html() : q4.html());
-        $('#s2').html(q5.attr('disabled') ? q5.html() : q6.html());
-        $('#s4').html(q7.attr('disabled') ? q7.html() : q8.html());
+        $('#s1').html(q1.hasClass('disabled') ? q1.html() : q2.html());
+        $('#s3').html(q3.hasClass('disabled') ? q3.html() : q4.html());
+        $('#s2').html(q5.hasClass('disabled') ? q5.html() : q6.html());
+        $('#s4').html(q7.hasClass('disabled') ? q7.html() : q8.html());
 
-        $('#input_s1').val(q1.attr('disabled') ? $('#input_q1').val() : $('#input_q2').val());
-        $('#input_s3').val(q3.attr('disabled') ? $('#input_q3').val() : $('#input_q4').val());
-        $('#input_s2').val(q5.attr('disabled') ? $('#input_q5').val() : $('#input_q6').val());
-        $('#input_s4').val(q7.attr('disabled') ? $('#input_q7').val() : $('#input_q8').val());
+        $('#input_s1').val(q1.hasClass('disabled') ? $('#input_q1').val() : $('#input_q2').val());
+        $('#input_s3').val(q3.hasClass('disabled') ? $('#input_q3').val() : $('#input_q4').val());
+        $('#input_s2').val(q5.hasClass('disabled') ? $('#input_q5').val() : $('#input_q6').val());
+        $('#input_s4').val(q7.hasClass('disabled') ? $('#input_q7').val() : $('#input_q8').val());
 
         var s1 = $('#s1');
         var s2 = $('#s2');
         var s3 = $('#s3');
         var s4 = $('#s4');
 
-        $('#f1').html(s1.attr('disabled') ? s1.html() : s2.html());
-        $('#f2').html(s3.attr('disabled') ? s3.html() : s4.html());
+        $('#f1').html(s1.hasClass('disabled') ? s1.html() : s2.html());
+        $('#f2').html(s3.hasClass('disabled') ? s3.html() : s4.html());
 
-        $('#input_f1').val(s1.attr('disabled') ? $('#input_s1').val() : $('#input_s2').val());
-        $('#input_f2').val(s3.attr('disabled') ? $('#input_s3').val() : $('#input_s4').val());
+        $('#input_f1').val(s1.hasClass('disabled') ? $('#input_s1').val() : $('#input_s2').val());
+        $('#input_f2').val(s3.hasClass('disabled') ? $('#input_s3').val() : $('#input_s4').val());
 
-        $('#input_winner').val($('#f1').attr('disabled') ? $('#input_f1').val() : $('#input_f2').val());
+        $('#input_winner').val($('#f1').hasClass('disabled') ? $('#input_f1').val() : $('#input_f2').val());
     };
+
 
     $(function () {
 
@@ -45,12 +46,15 @@
             $('#betForm').submit();
         });
 
-        $('button').click(function (event) {
+        $('a.btn').click(function (event) {
 
-            $(this).parent().find('button').each(function () {
+            $(this).parent().find('a').each(function () {
                 var $this = $(this);
-                if ($this.attr('disabled')) $this.removeAttr('disabled');
-                else $this.attr('disabled', 'disabled');
+                if ($this.hasClass('disabled')) {
+                    $this.removeClass('disabled');
+                    $this.addClass('btn-inverse');
+                }
+                else $this.addClass('disabled');
             });
 
             updateFinals();
@@ -58,6 +62,14 @@
             $('#betForm').submit();
 //            event.preventDefault();
         });
+
+        $('a.btn').each(function () {
+            var $this = $(this);
+            if ($this.hasClass('disabled')) {
+                $this.addClass('btn-success');
+            }
+        });
+
 
     });
 </script>
@@ -91,13 +103,13 @@
 
             <table>
                 #{list items:bet.matchBets, as:'matchBet' }
-                    <tr>
+                    <tr style="height: 36px;">
                         <td class="teamColumn">
                             <span class="floatRight">${matchBet.match.homeTeam.name}</span>
                             <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
                                    value="${matchBet.match.id}">
                         </td>
-                        <td class="goalsColumn">
+                        <td class="goalsColumn" valign="bottom">
                             #{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].homeTeamScore', value:bet.matchBets[matchBet_index-1].homeTeamScore, class:'goals' }
                                 #{option 0}0#{/option}
                                 #{option 1}1#{/option}
@@ -111,8 +123,8 @@
                                 #{option 9}9#{/option}
                             #{/select}
                         </td>
-                        <td>-</td>
-                        <td class="goalsColumn">
+                        <td width="16px" align="center">-</td>
+                        <td class="goalsColumn" valign="bottom">
                             #{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].awayTeamScore', value:bet.matchBets[matchBet_index-1].awayTeamScore, class:'goals' }
                                 #{option 0}0#{/option}
                                 #{option 1}1#{/option}
@@ -141,7 +153,12 @@
                 #{list items:bet.tables, as:'group' }
                     <tr>
                         <td>
-                            <table border="1">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th colspan="4">
+                                        Gruppe ${group.name}
+                                    </th>
+                                </tr>
                                 #{list items:group.table(), as:'team'}
                                     <tr>
                                         <td width="120px">${team.name}</td>
@@ -165,51 +182,51 @@
                 <tr>
                     <td>
                         <div>
-                            <button class="updateS1" ${bet.q1.equals(bet.s1) ? 'disabled="disabled"' : ''}
-                                    id="q1">${bet.q1.name}</button>
+                            <a href="#" class="btn ${bet.q1.equals(bet.s1) ? 'disabled' : ''}"
+                               id="q1">${bet.q1.name}</a>
                             <br/>
-                            <button class="updateS1" ${bet.q2.equals(bet.s1) ? 'disabled="disabled"' : ''}
-                                    id="q2">${bet.q2.name}</button>
+                            <a href="#" class="btn ${bet.q2.equals(bet.s1) ? 'disabled' : ''}"
+                               id="q2">${bet.q2.name}</a>
                         </div>
                         <br/>
                         <br/>
 
                         <div>
-                            <button class="updateS3" ${bet.q3.equals(bet.s3) ? 'disabled="disabled"' : ''}
-                                    id="q3">${bet.q3.name}</button>
+                            <a href="#" class="btn ${bet.q3.equals(bet.s3) ? 'disabled' : ''}"
+                               id="q3">${bet.q3.name}</a>
                             <br/>
-                            <button class="updateS3" ${bet.q4.equals(bet.s3) ? 'disabled="disabled"' : ''}
-                                    id="q4">${bet.q4.name}</button>
+                            <a href="#" class="btn ${bet.q4.equals(bet.s3) ? 'disabled' : ''}"
+                               id="q4">${bet.q4.name}</a>
                         </div>
                         <br/>
                         <br/>
 
                         <div>
-                            <button class="updateS2" ${bet.q5.equals(bet.s2) ? 'disabled="disabled"' : ''}
-                                    id="q5">${bet.q5.name}</button>
+                            <a href="#" class="btn ${bet.q5.equals(bet.s2) ? 'disabled' : ''}"
+                               id="q5">${bet.q5.name}</a>
                             <br/>
-                            <button class="updateS2" ${bet.q6.equals(bet.s2) ? 'disabled="disabled"' : ''}
-                                    id="q6">${bet.q6.name}</button>
+                            <a href="#" class="btn ${bet.q6.equals(bet.s2) ? 'disabled' : ''}"
+                               id="q6">${bet.q6.name}</a>
                         </div>
                         <br/>
                         <br/>
 
                         <div>
-                            <button class="updateS4" ${bet.q7.equals(bet.s4) ? 'disabled="disabled"' : ''}
-                                    id="q7">${bet.q7.name}</button>
+                            <a href="#" class="btn ${bet.q7.equals(bet.s4) ? 'disabled' : ''}"
+                               id="q7">${bet.q7.name}</a>
                             <br/>
-                            <button class="updateS4" ${bet.q8.equals(bet.s4) ? 'disabled="disabled"' : ''}
-                                    id="q8">${bet.q8.name}</button>
+                            <a href="#" class="btn ${bet.q8.equals(bet.s4) ? 'disabled' : ''}"
+                               id="q8">${bet.q8.name}</a>
                         </div>
                         <br/>
                     </td>
                     <td>
                         <div>
-                            <button class="updateF1" ${bet.s1.equals(bet.f1) ? 'disabled="disabled"' : ''}
-                                    id="s1">${bet.s1.name}</button>
+                            <a href="#" class="btn ${bet.s1.equals(bet.f1) ? 'disabled' : ''}"
+                               id="s1">${bet.s1.name}</a>
                             <br/>
-                            <button class="updateF1" ${bet.s2.equals(bet.f1) ? 'disabled="disabled"' : ''}
-                                    id="s2">${bet.s2.name}</button>
+                            <a href="#" class="btn ${bet.s2.equals(bet.f1) ? 'disabled' : ''}"
+                               id="s2">${bet.s2.name}</a>
                         </div>
                         <br/>
                         <br/>
@@ -217,20 +234,20 @@
                         <br/>
 
                         <div>
-                            <button class="updateF2" ${bet.s3.equals(bet.f2) ? 'disabled="disabled"' : ''}
-                                    id="s3">${bet.s3.name}</button>
+                            <a href="#" class="btn ${bet.s3.equals(bet.f2) ? 'disabled' : ''}"
+                               id="s3">${bet.s3.name}</a>
                             <br/>
-                            <button class="updateF2" ${bet.s4.equals(bet.f2) ? 'disabled="disabled"' : ''}
-                                    id="s4">${bet.s4.name}</button>
+                            <a href="#" class="btn ${bet.s4.equals(bet.f2) ? 'disabled' : ''}"
+                               id="s4">${bet.s4.name}</a>
                         </div>
                     </td>
                     <td>
                         <div>
-                            <button class="updateWinner" ${bet.f1.equals(bet.winner) ? 'disabled="disabled"' : ''}
-                                    id="f1">${bet.f1.name}</button>
+                            <a href="#" class="btn ${bet.f1.equals(bet.winner) ? 'disabled' : ''}"
+                               id="f1">${bet.f1.name}</a>
                             <br/>
-                            <button class="updateWinner" ${bet.f2.equals(bet.winner) ? 'disabled="disabled"' : ''}
-                                    id="f2">${bet.f2.name}</button>
+                            <a href="#" class="btn ${bet.f2.equals(bet.winner) ? 'disabled' : ''}"
+                               id="f2">${bet.f2.name}</a>
                         </div>
                     </td>
                 </tr>
