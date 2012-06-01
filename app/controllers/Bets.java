@@ -3,11 +3,12 @@ package controllers;
 import models.Bet;
 import models.Team;
 import play.mvc.Controller;
+import view.EditBet;
 
 public class Bets extends Controller {
 
   public static void create() {
-    Bet bet = new Bet();
+    EditBet bet = new EditBet();
     bet.init();
     render(bet);
   }

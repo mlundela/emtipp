@@ -1,9 +1,6 @@
 package view;
 
-import models.Bet;
-import models.Group;
-import models.MatchBet;
-import models.Team;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,13 +27,34 @@ public class EditBet {
   public Team f2;
   public Team winner;
 
+  public EditBet() {
+    for (Group group : Group.<Group>findAll()) {
+      GroupBet groupBet = new GroupBet();
+      for (Match match : group.matches) {
+        groupBet.matchBets.add(new MatchBet(match));
+      }
+      groupBets.add(groupBet);
+    }
+
+    updateTables();
+    updateFinals();
+  }
+
+  private void updateFinals() {
+    throw new RuntimeException("Not implemented yet!");
+  }
+
+  private void updateTables() {
+    throw new RuntimeException("Not implemented yet!");
+  }
+
   public EditBet(Bet bet) {
     
     id = bet.id;
     
     Map<Long, List<MatchBet>> groupMatches = getGroupMatches(bet);
     for (Group group : Group.<Group>findAll()) {
-      groupBets.add(new GroupBet(group, groupMatches.get(group.id)));
+      groupBets.add(new GroupBet(groupMatches.get(group.id)));
     }
     
     q1 = bet.q1;
