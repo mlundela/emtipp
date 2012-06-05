@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class MatchBet extends Model {
+public class MatchBet extends Model implements Comparable<MatchBet> {
 
 
   @ManyToOne
@@ -27,5 +27,14 @@ public class MatchBet extends Model {
       return 1;
     }
     return 0;
+  }
+
+  @Override
+  public int compareTo(MatchBet matchBet) {
+    return getSortIndex() - matchBet.getSortIndex();
+  }
+
+  private int getSortIndex() {
+    return (int) (match.group.id * 1000 + match.id);
   }
 }

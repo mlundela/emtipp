@@ -1,13 +1,20 @@
 package models;
 
+import play.data.validation.Email;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
 public class Bet extends Model {
+
+  @Email
+  public String email;
+
+  public String user;
 
   @OneToMany(cascade = CascadeType.ALL)
   public List<MatchBet> matchBets = new ArrayList<MatchBet>();
@@ -44,6 +51,11 @@ public class Bet extends Model {
 
   @Transient
   public List<Group> tables;
+
+  public List<MatchBet> matchBetsSorted() {
+    Collections.sort(matchBets);
+    return matchBets;
+  }
 
   public void init() {
     for (Match match : Match.<Match>findAll()) {
