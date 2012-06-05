@@ -6,7 +6,7 @@
 
 <table>
 <tr>
-<td width="300px">
+<td width="300px" valign="top">
 
 
     <input type="hidden" name="bet.id" value="${bet.id}">
@@ -32,11 +32,6 @@
 
     <table class="bets_table">
         #{list items:bet.matchBetsSorted(), as:'matchBet' }
-            #{if (matchBet_index % 6 == 1) }
-                <tr>
-                    <td>&nbsp;</td>
-                </tr>
-            #{/if}
             <tr>
                 <td class="teamColumn">
                     <span class="floatRight">${matchBet.match.homeTeam.name}</span>
@@ -74,13 +69,18 @@
                 </td>
                 <td class="teamColumn"><span class="floatLeft">${matchBet.match.awayTeam.name}</span></td>
             </tr>
+            #{if (matchBet_index-1) % 6 == 5 }
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+            #{/if}
         #{/list}
     </table>
 
 
 </td>
 
-<td width="260px">
+<td width="260px" valign="top">
 
 
     <table>
@@ -108,7 +108,7 @@
     </table>
 
 </td>
-<td>
+<td valign="top">
 
 
     <h2>
