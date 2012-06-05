@@ -18,11 +18,9 @@ public class Bets extends Controller {
   }
 
   public static void save(Bet bet) {
-
     if (bet.tablesChanged()) {
       bet.updateFinals();
     }
-
     bet.save();
     edit(bet.id);
   }

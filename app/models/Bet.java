@@ -9,7 +9,6 @@ import java.util.List;
 @Entity
 public class Bet extends Model {
 
-  @OrderBy("match desc ")
   @OneToMany(cascade = CascadeType.ALL)
   public List<MatchBet> matchBets = new ArrayList<MatchBet>();
   @OneToOne
