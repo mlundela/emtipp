@@ -1,4 +1,4 @@
-import models.Players;
+import models.Player;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GetPlayersTest extends UnitTest {
 
     @Test
-    public void doIt() throws IOException {
+    public void doIt() throws IOException, InterruptedException {
         String url;
         int[] teamid = {56370, 58837, 35, 39, 43, 47, 49, 66, 95, 109, 110, 64, 57451, 122, 127, 57166};
 
@@ -29,9 +29,13 @@ public class GetPlayersTest extends UnitTest {
                     String PlayerURL = player.attr("href");
                     Document Doc = Jsoup.parse(PlayerURL);
                     String PlayerID = Doc.body().text();
-                    int playerID = Integer.parseInt(PlayerID.split("=")[2].split("/")[0]);
-                    playerBio(playerID);
-
+                    String isPlayer = Doc.body().text().split("=")[1].split("/")[2];
+                    if (isPlayer.equals("player")) {
+                        int playerID = Integer.parseInt(PlayerID.split("=")[2].split("/")[0]);
+                        playerBio(playerID);
+                        //getStats(playerID);
+                        Thread.sleep(100);
+                    }
                 }
             }
         }
@@ -43,8 +47,8 @@ public class GetPlayersTest extends UnitTest {
 
         String url = "http://www.uefa.com/uefaeuro/season=2012/teams/player=" + PlayerID + "/index.html";
         Document doc = Jsoup.connect(url).get();
-        Elements elements = doc.select(".infoBox");
 
+        Elements elements = doc.select(".infoBox");
         for (Element element : elements) {
 
             Elements Bios = element.select(".innerText li");
@@ -52,12 +56,23 @@ public class GetPlayersTest extends UnitTest {
             String Posision = Bios.get(1).text().split(": ")[1];
             String Nationality = Bios.get(3).text().split(": ")[1];
             String Club = Bios.get(4).text().split(": ")[1];
-            Players player = new Players(name, PlayerID);
+            Player player = new Player(name, PlayerID, Posision, Nationality, Club);
             player.save();
-            player.toString();
-
 
         }
+
+    }
+
+    public void getStats(int PlayerID) throws IOException {
+
+        String url = "http://www.uefa.com/uefaeuro/season=2012/teams/player=" + PlayerID + "/index.html";
+        Document doc = Jsoup.connect(url).get();
+        Elements stats = doc.select(".statNum");
+        int Appearances = Integer.parseInt(stats.get(0).text());
+        int Goals = Integer.parseInt(stats.get(1).text());
+        int Assists = Integer.parseInt(stats.get(2).text());
+        System.out.println("Appearances= " + Appearances + " Goals = " + Goals + " Assist = " + Assists);
+
     }
 
 
