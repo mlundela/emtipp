@@ -1,0 +1,23 @@
+#{extends 'main.html' /}
+#{set title:'Registrer deg' /}
+
+
+<h2>${user.name}</h2>
+<h4>${user.email} (dette er ditt brukernavn for å logge inn)</h4>
+
+<br/>
+
+<h3>Mine tips:</h3>
+<p>
+    Du får lov til å endre på tipsene dine ut fredag. Hvert tips koster 100 kr.
+</p>
+<ul>
+#{list items:user.bets, as:'bet'}
+    <li>${bet.winner.name} vinner! | <a href="@{Bets.edit(bet.id)}">Endre</a></li>
+#{/list}
+</ul>
+
+<br/>
+<a href="@{Bets.create()}" class="btn">Nytt tips!</a>
+
+<a class="btn btn-danger" href="/logout">Logg ut</a>

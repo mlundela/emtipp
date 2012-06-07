@@ -2,11 +2,14 @@ package controllers;
 
 import models.Bet;
 import play.mvc.Controller;
+import play.mvc.With;
 
+@With(Secure.class)
 public class Bets extends Controller {
 
   public static void create() {
     Bet bet = new Bet();
+    bet.user = Security.connectedUser();
     bet.init();
     render(bet);
   }

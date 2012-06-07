@@ -1,6 +1,11 @@
 #{extends 'main.html' /}
 #{set title:'Registrer tips' /}
 
+<a class="btn" href="@{Users.get(bet.user.id)}">Tilbake</a>
+
+<br/>
+<br/>
+<br/>
 
 #{form @Bets.save(), id:'betForm' }
 
@@ -10,6 +15,7 @@
 
 
     <input type="hidden" name="bet.id" value="${bet.id}">
+    <input type="hidden" name="bet.user.id" value="${bet.user.id}">
     <input id="input_q1" type="hidden" name="bet.q1.id" value="${bet.q1.id}">
     <input id="input_q2" type="hidden" name="bet.q2.id" value="${bet.q2.id}">
     <input id="input_q3" type="hidden" name="bet.q3.id" value="${bet.q3.id}">
@@ -33,7 +39,7 @@
     <table class="bets_table">
         #{list items:bet.matchBetsSorted(), as:'matchBet' }
             <tr>
-                <td class="teamColumn">
+                <td class="teamColumn" valign="top">
                     <span class="floatRight">${matchBet.match.homeTeam.name}</span>
                     <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
                            value="${matchBet.match.id}">
@@ -52,7 +58,7 @@
                         #{option 9}9#{/option}
                     #{/select}
                 </td>
-                <td width="16px" align="center">-</td>
+            *{<td width="16px" valign="top">-</td>}*
                 <td class="goalsColumn" valign="bottom">
                     #{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].awayTeamScore', value:bet.matchBets[matchBet_index-1].awayTeamScore, class:'goals' }
                         #{option 0}0#{/option}
@@ -67,7 +73,7 @@
                         #{option 9}9#{/option}
                     #{/select}
                 </td>
-                <td class="teamColumn"><span class="floatLeft">${matchBet.match.awayTeam.name}</span></td>
+                <td class="teamColumn" valign="top"><span class="floatLeft">${matchBet.match.awayTeam.name}</span></td>
             </tr>
             #{if (matchBet_index-1) % 6 == 5 }
                 <tr>
@@ -111,30 +117,48 @@
 <td valign="top">
 
 
-    <h2>
-        Registrer ditt tips!
-    </h2>
+    <h3>Regler:</h3>
+
+    <ul>
+        <li>Tipp kampresultat i gruppespelet</li>
+        <li>Tipp lag i kvartfinale, semifinale, og finale</li>
+    </ul>
+
+    <h3>Poeng:</h3>
+
+    <ul>
+        <li> 3 poeng for riktig resultat</li>
+        <li> 1 poeng for riktig markering</li>
+        <li> 1 poeng pr riktig lag i kvartfinale</li>
+        <li> 2 poeng pr riktig lag i semi
+        </li>
+        <li> 4 poeng for riktig finaletaper
+        </li>
+        <li> 10 poeng for riktig finalevinner
+        </li>
+        <li> 10 poeng for riktig toppskårer
+        </li>
+        <li> 10 poeng for riktig assist-konge
+        </li>
+    </ul>
+
     <br/>
 
-    <label>Navn</label>
-    <input type="text" class="span3" name="bet.user" value="${bet.user}">
-    <br/>
-    <label>Epost</label>
-    <input type="text" class="span3" name="bet.email" value="${bet.email}">
-    <br/>
-    <br/>
-    <br/>
+    <h3>Toppskårer</h3>
+    #{select 'bet.topScorer.id', value:bet.topScorer.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
 
-    <h3>
-        Grønt betyr at laget vinner kampen:
-    </h3>
+    <h3>Assist-konge</h3>
+    #{select 'bet.topAssist.id', value:bet.topAssist.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
+
+    <h3>Finaler</h3>
+    <em>Grønt betyr at laget vinner kampen:</em>
 
     <br/>
     <table>
 
 
         <tr>
-            <td>
+            <td width="140px">
                 <div>
                     <a href="#" class="btn ${bet.q1.equals(bet.s1) ? 'disabled' : ''}"
                        id="q1">${bet.q1.name}</a>
@@ -174,7 +198,7 @@
                 </div>
                 <br/>
             </td>
-            <td>
+            <td width="140px">
                 <div>
                     <a href="#" class="btn ${bet.s1.equals(bet.f1) ? 'disabled' : ''}"
                        id="s1">${bet.s1.name}</a>
@@ -257,7 +281,7 @@
 
     $(function () {
 
-        $('.goals').change(function () {
+        $('.goals, .playerBet').change(function () {
             $('#betForm').submit();
         });
 
@@ -284,6 +308,7 @@
                 $this.addClass('btn-success');
             }
         });
+
 
     });
 

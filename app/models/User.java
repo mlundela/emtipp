@@ -4,9 +4,7 @@ import play.data.validation.Email;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,12 +13,11 @@ public class User extends Model {
 
   @Email
   public String email;
+  public String password;
+  public String name;
 
-
-  @OneToMany
-  List<MatchBet> matchBets = new ArrayList<MatchBet>();
-
-  @OneToMany
-  List<TeamBet> teamBets = new ArrayList<TeamBet>();
+  public List<Bet> getBets() {
+    return Bet.find("user = ?", this).fetch();
+  }
 
 }

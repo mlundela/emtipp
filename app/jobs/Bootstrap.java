@@ -24,6 +24,8 @@ public class Bootstrap extends Job {
       Logger.info("Create test user");
       User user = new User();
       user.email = "lundeland@gmail.com";
+      user.name = "Mads";
+      user.password = "jallajalla";
       user.save();
 
 

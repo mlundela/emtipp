@@ -4,3 +4,10 @@ tmp/
 *.iml
 *.ipr
 *.iws
+
+bin/
+data/
+db/
+dist/
+logs/
+modules/

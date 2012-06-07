@@ -4,12 +4,22 @@
 
 # Home page
 GET     /                                       Application.index
+
 GET     /bets/{<[0-9]+>id}                      Bets.get
 GET     /bets/new                               Bets.create
+GET     /bets/edit/{<[0-9]+>id}                 Bets.edit
 POST    /bets/new                               Bets.save
+
+GET     /register                               Users.create
+POST    /register                               Users.save
+GET     /users/{<[0-9]+>id}                     Users.get
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
+
+# Import Secure routes
+*      /                                        module:secure
+
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

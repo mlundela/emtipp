@@ -1,4 +1,14 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+
+<h3>Velkommen til em-tipp!</h3>
+<div>Em-tipp er basert på vm-tipp som ble arrangert for to år siden. Reglene er enkle, og innsatsen er kr 100 pr tips du
+    leverer.
+</div>
+<br/>
+<a class="btn" href="@{Users.create()}">Registrer deg</a>
+
+<a class="btn btn-primary" href="/login">Logg inn</a>
+
+${user}

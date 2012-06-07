@@ -1,6 +1,5 @@
 package models;
 
-import play.data.validation.Email;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
@@ -11,10 +10,8 @@ import java.util.List;
 @Entity
 public class Bet extends Model {
 
-  @Email
-  public String email;
-
-  public String user;
+  @ManyToOne(cascade = CascadeType.ALL)
+  public User user;
 
   @OneToMany(cascade = CascadeType.ALL)
   public List<MatchBet> matchBets = new ArrayList<MatchBet>();
@@ -49,12 +46,22 @@ public class Bet extends Model {
   @OneToOne
   public Team winner;
 
+  @ManyToOne
+  public Player topScorer;
+
+  @ManyToOne
+  public Player topAssist;
+
   @Transient
   public List<Group> tables;
 
   public List<MatchBet> matchBetsSorted() {
     Collections.sort(matchBets);
     return matchBets;
+  }
+
+  public List<Player> allPlayers() {
+    return Player.findAll();
   }
 
   public void init() {
@@ -64,6 +71,9 @@ public class Bet extends Model {
 
     updateTables();
     updateFinals();
+
+    topScorer = Player.<Player>findAll().get(0);
+    topAssist = Player.<Player>findAll().get(0);
   }
 
   public void updateTables() {

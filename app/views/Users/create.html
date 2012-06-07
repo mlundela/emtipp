@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'Registrer deg' /}
+
+
+#{form @Users.save() }
+
+<input type="hidden" name="user.id" value="${user.id}">
+
+<label for="username">Ditt navn</label>
+<input id="username" type="text" name="user.name" value="${user.name}">
+<br/>
+<label for="email">Epost</label>
+<input id="email" type="text" name="user.email" value="${user.email}">
+<br/>
+<label for="password">Passord</label>
+<input id="password" type="password" name="user.password" value="${user.password}">
+<br/>
+<input type="submit" value="Registrer deg">
+
+#{/form}
