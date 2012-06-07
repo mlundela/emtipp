@@ -27,7 +27,12 @@ public class Security extends Secure.Security {
   }
 
   public static User connectedUser() {
-    return User.find("byEmail", connected()).first();
+    String connected = connected();
+    if (connected == null) {
+      return null;
+    }
+    User user = User.find("byEmail", connected).first();
+    return user;
   }
 
 }
