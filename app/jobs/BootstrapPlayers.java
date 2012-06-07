@@ -7,11 +7,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import play.Logger;
 import play.jobs.Job;
-import play.jobs.OnApplicationStart;
 
 import java.io.IOException;
 
-@OnApplicationStart
+@
+
 public class BootstrapPlayers extends Job {
 
   public void doJob() throws Exception {
