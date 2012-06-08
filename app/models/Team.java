@@ -40,6 +40,12 @@ public class Team extends Model implements Comparable<Team> {
     if (goalDifference() < team.goalDifference()) {
       return 1;
     }
+    if (goalsScored > goalsScored) {
+      return -1;
+    }
+    if (goalsScored < goalsScored) {
+      return 1;
+    }
     return name.compareTo(team.name);
   }
 
