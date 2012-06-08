@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Bet extends Model {
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   public User user;
 
   @OneToMany(cascade = CascadeType.ALL)

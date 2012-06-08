@@ -11,7 +11,12 @@ public class Users extends Controller {
   }
 
   public static void save(User user) {
+
     user.save();
+
+    // Log in user
+    session.put("username", user.email);
+
     get(user.id);
   }
 

@@ -3,17 +3,22 @@
 
 
 <h2>${user.name}</h2>
-<h4>${user.email} (dette er ditt brukernavn for å logge inn)</h4>
+<p>${user.email}</p>
 
+<br/>
+<p>
+    Du har lov til å endre på tipsa dine ut fredag. Kvart tips kostar 100 kr.
+</p>
+<p>
+    Betaling kan gjerast til kontonr.: 9710 36 84971, eller kontant til Mads eller Øyvind.
+</p>
 <br/>
 
 <h3>Mine tips:</h3>
-<p>
-    Du får lov til å endre på tipsene dine ut fredag. Hvert tips koster 100 kr.
-</p>
 <ul>
 #{list items:user.bets, as:'bet'}
-    <li>${bet.winner.name} vinner! | <a href="@{Bets.edit(bet.id)}">Endre</a></li>
+    <li>${bet.winner.name} vinn! | <a href="@{Bets.edit(bet.id)}">Endre</a> | <a href="@{Bets.delete(bet.id)}">Slett</a>
+    </li>
 #{/list}
 </ul>
 

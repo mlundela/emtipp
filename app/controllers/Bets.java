@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Bet;
+import models.User;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -34,4 +35,10 @@ public class Bets extends Controller {
     render();
   }
 
+  public static void delete(Long id) {
+    Bet bet = Bet.findById(id);
+    bet.delete();
+    User user = Security.connectedUser();
+    Users.get(user.id);
+  }
 }
