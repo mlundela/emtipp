@@ -24,4 +24,8 @@ public class Users extends Controller {
     User user = User.findById(id);
     render(user);
   }
+//
+//  public static void list() {
+//    List<User> users = User.findAll();
+//  }
 }

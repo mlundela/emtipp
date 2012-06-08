@@ -24,11 +24,26 @@
     </li>
 </ul>
 <br/>
+
+<table class="table table-bordered">
+    <tr>
+        <th width="60px">Poeng</th>
+        <th>Tips</th>
+    </tr>
+
+#{list items:bets, as:'bet' }
+    <tr>
+        <td>0</td>
+        <td><a href="@{Bets.get(bet.id)}">${bet.user.name} - ${bet.winner.name} vinn!</a></td>
+    </tr>
+#{/list}
+</table>
+
+<br/>
+<br/>
 <a class="btn" href="@{Users.create()}">Registrer deg</a>
 
 <a class="btn btn-primary" href="/login">Logg inn</a>
 <br/>
 <br/>
 <p>* brukarnamn for innlogging er epost-adressa di.</p>
-
-${user}

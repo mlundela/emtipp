@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'Registrer tips' /}
+
+<a href="@{Users.get(user.id)}">Min side</a>
+<br/>
+<br/>
+
+<table class="table table-bordered">
+    <tr>
+        <th width="60px">Poeng</th>
+        <th>Tips</th>
+    </tr>
+
+#{list items:bets, as:'bet' }
+    <tr>
+        <td>0</td>
+        <td><a href="@{Bets.get(bet.id)}">${bet.user.name} - ${bet.winner.name} vinn!</a></td>
+    </tr>
+#{/list}
+</table>

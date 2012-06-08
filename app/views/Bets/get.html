@@ -1,4 +1,170 @@
 #{extends 'main.html' /}
-#{set title:'Registrer tips' /}
+#{set title:'Viser tips' /}
 
-Get!
+
+<a href="@{Bets.list()}">Alle tips</a>
+<br/>
+<br/>
+<h2>${bet.user.name} - ${bet.winner.name} vinn!</h2>
+
+
+<br/>
+<br/>
+<br/>
+
+<table>
+    <tr>
+        <td width="200px" valign="top">
+
+
+            <table class="bets_table table table-bordered">
+            #{list items:bet.matchBetsSorted(), as:'matchBet' }
+                <tr>
+                    <td class="teamColumn" valign="top">
+                        <span class="floatRight">${matchBet.match.homeTeam.name}</span>
+                        <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
+                               value="${matchBet.match.id}">
+                    </td>
+                    <td class="goalsColumn" valign="bottom">${matchBet.homeTeamScore}</td>
+                    <td class="goalsColumn" valign="bottom">${matchBet.awayTeamScore}</td>
+                    <td class="teamColumn" valign="top"><span class="floatLeft">${matchBet.match.awayTeam.name}</span>
+                    </td>
+                </tr>
+                #{if (matchBet_index-1) % 6 == 5 }
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                    </tr>
+                #{/if}
+            #{/list}
+            </table>
+
+
+        </td>
+        <td width="40px"></td>
+
+    *{<td width="260px" valign="top">}*
+
+
+    *{<table>}*
+    *{#{list items:bet.tables, as:'group' }}*
+    *{<tr>}*
+    *{<td>}*
+    *{<table class="table table-bordered">}*
+    *{<tr>}*
+    *{<th colspan="4">}*
+    *{Gruppe ${group.name}}*
+    *{</th>}*
+    *{</tr>}*
+    *{#{list items:group.table(), as:'team'}}*
+    *{<tr>}*
+    *{<td width="120px">${team.name}</td>}*
+    *{<td>${team.goalsScored}</td>}*
+    *{<td>${team.goalsConceded}</td>}*
+    *{<td>${team.points}</td>}*
+    *{</tr>}*
+    *{#{/list}}*
+    *{</table>}*
+    *{</td>}*
+    *{</tr>}*
+    *{#{/list}}*
+    *{</table>}*
+
+    *{</td>}*
+        <td valign="top">
+
+            <h3>Toppskårer</h3>
+
+            <p>${bet.topScorer}</p>
+
+            <h3>Assist-konge</h3>
+
+            <p>${bet.topAssist}</p>
+
+            <h3>Finaler</h3>
+
+            <br/>
+            <table>
+
+
+                <tr>
+                    <td width="140px">
+                        <div>
+                            <a href="#" class="btn ${bet.q1.equals(bet.s1) ? 'btn-success' : ''}"
+                               id="q1">${bet.q1.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.q2.equals(bet.s1) ? 'btn-success' : ''}"
+                               id="q2">${bet.q2.name}</a>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        <div>
+                            <a href="#" class="btn ${bet.q3.equals(bet.s3) ? 'btn-success' : ''}"
+                               id="q3">${bet.q3.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.q4.equals(bet.s3) ? 'btn-success' : ''}"
+                               id="q4">${bet.q4.name}</a>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        <div>
+                            <a href="#" class="btn ${bet.q5.equals(bet.s2) ? 'btn-success' : ''}"
+                               id="q5">${bet.q5.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.q6.equals(bet.s2) ? 'btn-success' : ''}"
+                               id="q6">${bet.q6.name}</a>
+                        </div>
+                        <br/>
+                        <br/>
+
+                        <div>
+                            <a href="#" class="btn ${bet.q7.equals(bet.s4) ? 'btn-success' : ''}"
+                               id="q7">${bet.q7.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.q8.equals(bet.s4) ? 'btn-success' : ''}"
+                               id="q8">${bet.q8.name}</a>
+                        </div>
+                        <br/>
+                    </td>
+                    <td width="140px">
+                        <div>
+                            <a href="#" class="btn ${bet.s1.equals(bet.f1) ? 'btn-success' : ''}"
+                               id="s1">${bet.s1.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.s2.equals(bet.f1) ? 'btn-success' : ''}"
+                               id="s2">${bet.s2.name}</a>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <div>
+                            <a href="#" class="btn ${bet.s3.equals(bet.f2) ? 'btn-success' : ''}"
+                               id="s3">${bet.s3.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.s4.equals(bet.f2) ? 'btn-success' : ''}"
+                               id="s4">${bet.s4.name}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <a href="#" class="btn ${bet.f1.equals(bet.winner) ? 'btn-success' : ''}"
+                               id="f1">${bet.f1.name}</a>
+                            <br/>
+                            <a href="#" class="btn ${bet.f2.equals(bet.winner) ? 'btn-success' : ''}"
+                               id="f2">${bet.f2.name}</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+
+
+
+

@@ -2,8 +2,11 @@ package controllers;
 
 import models.Bet;
 import models.User;
+import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
+
+import java.util.List;
 
 @With(Secure.class)
 public class Bets extends Controller {
@@ -26,13 +29,14 @@ public class Bets extends Controller {
       bet.updateFinals();
     }
     bet.save();
+    Logger.info("Bet saved. Id=" + bet.id);
     edit(bet.id);
   }
 
   public static void get(Long id) {
     Bet bet = Bet.findById(id);
     bet.updateTables();
-    render();
+    render(bet);
   }
 
   public static void delete(Long id) {
@@ -40,5 +44,11 @@ public class Bets extends Controller {
     bet.delete();
     User user = Security.connectedUser();
     Users.get(user.id);
+  }
+
+  public static void list() {
+    List<Bet> bets = Bet.findAll();
+    User user = Security.connectedUser();
+    render(bets, user);
   }
 }

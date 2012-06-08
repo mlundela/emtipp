@@ -1,6 +1,9 @@
 #{extends 'main.html' /}
 #{set title:'Registrer deg' /}
 
+<a href="@{Bets.list()}">Alle tips</a>
+<br/>
+<br/>
 
 <h2>${user.name}</h2>
 <p>${user.email}</p>
@@ -18,6 +21,7 @@
 <ul>
 #{list items:user.bets, as:'bet'}
     <li>${bet.winner.name} vinn! | <a href="@{Bets.edit(bet.id)}">Endre</a> | <a href="@{Bets.delete(bet.id)}">Slett</a>
+        | <a href="@{Bets.get(bet.id)}">Vis</a>
     </li>
 #{/list}
 </ul>
