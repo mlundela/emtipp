@@ -18,7 +18,8 @@
 <h3>Mine tips:</h3>
 <ul>
 #{list items:user.bets, as:'bet'}
-    <li>${bet.winner.name} vinn! | <a href="@{Bets.get(bet.id)}">Vis</a> | <a href="@{Bets.edit(bet.id)}">Endre</a>
+    <li>${bet.winner.name} vinn! | <a href="@{Bets.get(bet.id)}">Vis</a>
+    *{| <a href="@{Bets.edit(bet.id)}">Endre</a>}*
     </li>
 #{/list}
 </ul>
