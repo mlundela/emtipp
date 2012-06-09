@@ -55,6 +55,14 @@ public class Bet extends Model {
   @Transient
   public List<Group> tables;
 
+  public int getPoints() {
+    int out = 0;
+    for (MatchBet matchBet : matchBets) {
+      out += matchBet.getScore();
+    }
+    return out;
+  }
+
   public List<MatchBet> matchBetsSorted() {
     Collections.sort(matchBets);
     return matchBets;
