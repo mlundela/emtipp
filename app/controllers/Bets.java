@@ -19,9 +19,10 @@ public class Bets extends Controller {
   }
 
   public static void edit(Long id) {
-    Bet bet = Bet.findById(id);
-    bet.updateTables();
-    renderTemplate("Bets/create.html", bet);
+    get(id);
+//    Bet bet = Bet.findById(id);
+//    bet.updateTables();
+//    renderTemplate("Bets/create.html", bet);
   }
 
   public static void save(Bet bet) {
