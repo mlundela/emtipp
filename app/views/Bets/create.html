@@ -166,11 +166,20 @@
 
     <br/>
 
+
     <h3>Toppskårer</h3>
-    #{select 'bet.topScorer.id', value:bet.topScorer.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
+
+    <p>${bet.topScorer}</p>
 
     <h3>Assist-konge</h3>
-    #{select 'bet.topAssist.id', value:bet.topAssist.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
+
+    <p>${bet.topAssist}</p>
+
+*{<h3>Toppskårer</h3>}*
+*{#{select 'bet.topScorer.id', value:bet.topScorer.id, items :bet.allPlayers(), class: 'player-input playerBet' /}}*
+
+*{<h3>Assist-konge</h3>}*
+*{#{select 'bet.topAssist.id', value:bet.topAssist.id, items :bet.allPlayers(), class: 'player-input playerBet' /}}*
 
     <h3>Finaler</h3>
     <em>Grønt betyr at laget vinner kampen:</em>
