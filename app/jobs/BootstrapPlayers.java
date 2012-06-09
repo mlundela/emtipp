@@ -6,12 +6,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import play.Logger;
-import play.jobs.Every;
 import play.jobs.Job;
 
 import java.io.IOException;
 
-@Every("1min")
+//@Every("1min")
 public class BootstrapPlayers extends Job {
 
   public void doJob() throws Exception {

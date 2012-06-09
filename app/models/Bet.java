@@ -57,9 +57,9 @@ public class Bet extends Model {
 
   public int getPoints() {
     int out = 0;
-//    for (MatchBet matchBet : matchBets) {
-//      out += matchBet.getScore();
-//    }
+    for (MatchBet matchBet : matchBets) {
+      out += matchBet.getScore();
+    }
     return out;
   }
 

@@ -21,6 +21,9 @@ public class MatchBet extends Model implements Comparable<MatchBet> {
 
 
   public int getScore() {
+    if (!match.isPlayed) {
+      return 0;
+    }
     if (homeTeamScore == match.homeTeamScore && awayTeamScore == match.awayTeamScore) {
       return 3;
     } else if (homeTeamScore == match.homeTeamScore || awayTeamScore == match.awayTeamScore) {
