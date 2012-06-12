@@ -9,34 +9,34 @@
 
 #{form @Bets.save(), id:'betForm' }
 
+<input type="hidden" name="bet.id" value="${bet.id}">
+<input type="hidden" name="bet.user.id" value="${bet.user.id}">
+<input id="input_q1" type="hidden" name="bet.q1.id" value="${bet.q1.id}">
+<input id="input_q2" type="hidden" name="bet.q2.id" value="${bet.q2.id}">
+<input id="input_q3" type="hidden" name="bet.q3.id" value="${bet.q3.id}">
+<input id="input_q4" type="hidden" name="bet.q4.id" value="${bet.q4.id}">
+<input id="input_q5" type="hidden" name="bet.q5.id" value="${bet.q5.id}">
+<input id="input_q6" type="hidden" name="bet.q6.id" value="${bet.q6.id}">
+<input id="input_q7" type="hidden" name="bet.q7.id" value="${bet.q7.id}">
+<input id="input_q8" type="hidden" name="bet.q8.id" value="${bet.q8.id}">
+
+<input id="input_s1" type="hidden" name="bet.s1.id" value="${bet.s1.id}">
+<input id="input_s2" type="hidden" name="bet.s2.id" value="${bet.s2.id}">
+<input id="input_s3" type="hidden" name="bet.s3.id" value="${bet.s3.id}">
+<input id="input_s4" type="hidden" name="bet.s4.id" value="${bet.s4.id}">
+
+<input id="input_f1" type="hidden" name="bet.f1.id" value="${bet.f1.id}">
+<input id="input_f2" type="hidden" name="bet.f2.id" value="${bet.f2.id}">
+
+<input id="input_winner" type="hidden" name="bet.winner.id" value="${bet.winner.id}">
+
 <table>
+
 <tr>
-<td width="300px" valign="top">
+<td width="200px" valign="top">
 
 
-    <input type="hidden" name="bet.id" value="${bet.id}">
-    <input type="hidden" name="bet.user.id" value="${bet.user.id}">
-    <input id="input_q1" type="hidden" name="bet.q1.id" value="${bet.q1.id}">
-    <input id="input_q2" type="hidden" name="bet.q2.id" value="${bet.q2.id}">
-    <input id="input_q3" type="hidden" name="bet.q3.id" value="${bet.q3.id}">
-    <input id="input_q4" type="hidden" name="bet.q4.id" value="${bet.q4.id}">
-    <input id="input_q5" type="hidden" name="bet.q5.id" value="${bet.q5.id}">
-    <input id="input_q6" type="hidden" name="bet.q6.id" value="${bet.q6.id}">
-    <input id="input_q7" type="hidden" name="bet.q7.id" value="${bet.q7.id}">
-    <input id="input_q8" type="hidden" name="bet.q8.id" value="${bet.q8.id}">
-
-    <input id="input_s1" type="hidden" name="bet.s1.id" value="${bet.s1.id}">
-    <input id="input_s2" type="hidden" name="bet.s2.id" value="${bet.s2.id}">
-    <input id="input_s3" type="hidden" name="bet.s3.id" value="${bet.s3.id}">
-    <input id="input_s4" type="hidden" name="bet.s4.id" value="${bet.s4.id}">
-
-    <input id="input_f1" type="hidden" name="bet.f1.id" value="${bet.f1.id}">
-    <input id="input_f2" type="hidden" name="bet.f2.id" value="${bet.f2.id}">
-
-    <input id="input_winner" type="hidden" name="bet.winner.id" value="${bet.winner.id}">
-
-
-    <table class="bets_table">
+    <table class="bets_table table table-bordered">
         #{list items:bet.matchBetsSorted(), as:'matchBet' }
             <tr>
                 <td class="teamColumn" valign="top">
@@ -44,40 +44,14 @@
                     <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
                            value="${matchBet.match.id}">
                 </td>
-                <td class="goalsColumn" valign="bottom">
-                    #{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].homeTeamScore', value:bet.matchBets[matchBet_index-1].homeTeamScore, class:'goals' }
-                        #{option 0}0#{/option}
-                        #{option 1}1#{/option}
-                        #{option 2}2#{/option}
-                        #{option 3}3#{/option}
-                        #{option 4}4#{/option}
-                        #{option 5}5#{/option}
-                        #{option 6}6#{/option}
-                        #{option 7}7#{/option}
-                        #{option 8}8#{/option}
-                        #{option 9}9#{/option}
-                    #{/select}
+                <td class="goalsColumn" valign="bottom">${matchBet.homeTeamScore}</td>
+                <td class="goalsColumn" valign="bottom">${matchBet.awayTeamScore}</td>
+                <td class="teamColumn" valign="top"><span class="floatLeft">${matchBet.match.awayTeam.name}</span>
                 </td>
-            *{<td width="16px" valign="top">-</td>}*
-                <td class="goalsColumn" valign="bottom">
-                    #{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].awayTeamScore', value:bet.matchBets[matchBet_index-1].awayTeamScore, class:'goals' }
-                        #{option 0}0#{/option}
-                        #{option 1}1#{/option}
-                        #{option 2}2#{/option}
-                        #{option 3}3#{/option}
-                        #{option 4}4#{/option}
-                        #{option 5}5#{/option}
-                        #{option 6}6#{/option}
-                        #{option 7}7#{/option}
-                        #{option 8}8#{/option}
-                        #{option 9}9#{/option}
-                    #{/select}
-                </td>
-                <td class="teamColumn" valign="top"><span class="floatLeft">${matchBet.match.awayTeam.name}</span></td>
             </tr>
             #{if (matchBet_index-1) % 6 == 5 }
                 <tr>
-                    <td>&nbsp;</td>
+                    <td colspan="4">&nbsp;</td>
                 </tr>
             #{/if}
         #{/list}
@@ -85,6 +59,58 @@
 
 
 </td>
+<td width="40px"></td>
+*{<td width="300px" valign="top">}*
+
+*{<table class="bets_table">}*
+*{#{list items:bet.matchBetsSorted(), as:'matchBet' }}*
+*{<tr>}*
+*{<td class="teamColumn" valign="top">}*
+*{<span class="floatRight">${matchBet.match.homeTeam.name}</span>}*
+*{<input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"}*
+*{value="${matchBet.match.id}">}*
+*{</td>}*
+*{<td class="goalsColumn" valign="bottom">}*
+*{#{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].homeTeamScore', value:bet.matchBets[matchBet_index-1].homeTeamScore, class:'goals' }}*
+*{#{option 0}0#{/option}}*
+*{#{option 1}1#{/option}}*
+*{#{option 2}2#{/option}}*
+*{#{option 3}3#{/option}}*
+*{#{option 4}4#{/option}}*
+*{#{option 5}5#{/option}}*
+*{#{option 6}6#{/option}}*
+*{#{option 7}7#{/option}}*
+*{#{option 8}8#{/option}}*
+*{#{option 9}9#{/option}}*
+*{#{/select}}*
+*{</td>}*
+*{<td width="16px" valign="top">-</td>}*
+*{<td class="goalsColumn" valign="bottom">}*
+*{#{select 'bet.matchBets[' + java.lang.String.valueOf(matchBet_index - 1) + '].awayTeamScore', value:bet.matchBets[matchBet_index-1].awayTeamScore, class:'goals' }}*
+*{#{option 0}0#{/option}}*
+*{#{option 1}1#{/option}}*
+*{#{option 2}2#{/option}}*
+*{#{option 3}3#{/option}}*
+*{#{option 4}4#{/option}}*
+*{#{option 5}5#{/option}}*
+*{#{option 6}6#{/option}}*
+*{#{option 7}7#{/option}}*
+*{#{option 8}8#{/option}}*
+*{#{option 9}9#{/option}}*
+*{#{/select}}*
+*{</td>}*
+*{<td class="teamColumn" valign="top"><span class="floatLeft">${matchBet.match.awayTeam.name}</span></td>}*
+*{</tr>}*
+*{#{if (matchBet_index-1) % 6 == 5 }}*
+*{<tr>}*
+*{<td>&nbsp;</td>}*
+*{</tr>}*
+*{#{/if}}*
+*{#{/list}}*
+*{</table>}*
+
+
+*{</td>}*
 
 <td width="260px" valign="top">
 
@@ -140,11 +166,20 @@
 
     <br/>
 
+
     <h3>Toppskårer</h3>
-    #{select 'bet.topScorer.id', value:bet.topScorer.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
+
+    <p>${bet.topScorer}</p>
 
     <h3>Assist-konge</h3>
-    #{select 'bet.topAssist.id', value:bet.topAssist.id, items :bet.allPlayers(), class: 'player-input playerBet' /}
+
+    <p>${bet.topAssist}</p>
+
+*{<h3>Toppskårer</h3>}*
+*{#{select 'bet.topScorer.id', value:bet.topScorer.id, items :bet.allPlayers(), class: 'player-input playerBet' /}}*
+
+*{<h3>Assist-konge</h3>}*
+*{#{select 'bet.topAssist.id', value:bet.topAssist.id, items :bet.allPlayers(), class: 'player-input playerBet' /}}*
 
     <h3>Finaler</h3>
     <em>Grønt betyr at laget vinner kampen:</em>

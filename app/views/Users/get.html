@@ -10,9 +10,7 @@
 
 <br/>
 <p>
-    Du har lov til å endre på tipsa dine ut fredag. Kvart tips kostar 100 kr.
-</p>
-<p>
+    Kvart tips kostar 100 kr.
     Betaling kan gjerast til kontonr.: 9710 36 84971, eller kontant til Mads eller Øyvind.
 </p>
 <br/>
@@ -20,13 +18,11 @@
 <h3>Mine tips:</h3>
 <ul>
 #{list items:user.bets, as:'bet'}
-    <li>${bet.winner.name} vinn! | <a href="@{Bets.edit(bet.id)}">Endre</a> | <a href="@{Bets.delete(bet.id)}">Slett</a>
-        | <a href="@{Bets.get(bet.id)}">Vis</a>
+    <li>${bet.winner.name} vinn! | <a href="@{Bets.get(bet.id)}">Vis</a>
+    *{| <a href="@{Bets.edit(bet.id)}">Endre</a>}*
     </li>
 #{/list}
 </ul>
 
 <br/>
-<a href="@{Bets.create()}" class="btn">Nytt tips!</a>
-
 <a class="btn btn-danger" href="/logout">Logg ut</a>

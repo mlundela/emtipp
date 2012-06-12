@@ -19,6 +19,7 @@ public class Bets extends Controller {
   }
 
   public static void edit(Long id) {
+//    get(id);
     Bet bet = Bet.findById(id);
     bet.updateTables();
     renderTemplate("Bets/create.html", bet);
