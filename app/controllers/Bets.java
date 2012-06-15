@@ -6,6 +6,7 @@ import play.Logger;
 import play.mvc.Controller;
 import play.mvc.With;
 
+import java.util.Collections;
 import java.util.List;
 
 @With(Secure.class)
@@ -49,6 +50,7 @@ public class Bets extends Controller {
 
   public static void list() {
     List<Bet> bets = Bet.findAll();
+    Collections.sort(bets);
     User user = Security.connectedUser();
     render(bets, user);
   }
