@@ -10,13 +10,12 @@ import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
 
-@Every("1min")
+@Every("2min")
 public class UpdateMatches extends Job {
 
   public void doJob() throws Exception {
 
     Logger.info("UPDATE MATCHES");
-
 
     Document doc = Jsoup.connect("http://www.altomfotball.no/element.do?cmd=tournament&tournamentId=6270").get();
     Elements elements = doc.select(".sd_fixtures tr");
