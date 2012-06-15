@@ -10,7 +10,7 @@ import play.Logger;
 import play.jobs.Every;
 import play.jobs.Job;
 
-@Every("30min")
+@Every("1min")
 public class UpdateMatches extends Job {
 
   public void doJob() throws Exception {
@@ -33,9 +33,13 @@ public class UpdateMatches extends Job {
 
       if (result.contains("-")) {
 
+        result = result.replace("(", "");
+        result = result.replace(")", "");
+
         Team homeTeam = Team.find("name = ?", homeTeamName).first();
         Team awayTeam = Team.find("name = ?", awayTeamName).first();
         Match match = Match.find("homeTeam = ? and awayTeam = ?", homeTeam, awayTeam).first();
+        Logger.info("Update match: " + homeTeam + " - " + awayTeam + " " + result);
 
         if (match == null) {
           Logger.error("Could not find match: " + homeTeamName + " - " + awayTeamName);

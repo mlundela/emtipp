@@ -4,6 +4,7 @@ import models.Bet;
 import models.User;
 import play.mvc.Controller;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Application extends Controller {
@@ -16,6 +17,7 @@ public class Application extends Controller {
       Users.get(user.id);
     } else {
       List<Bet> bets = Bet.findAll();
+      Collections.sort(bets);
       render(connected, bets);
     }
   }

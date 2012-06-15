@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-public class Bet extends Model {
+public class Bet extends Model implements Comparable<Bet> {
 
   @ManyToOne
   public User user;
@@ -150,5 +150,10 @@ public class Bet extends Model {
         !q6.id.equals(qq6.id) ||
         !q7.id.equals(qq7.id) ||
         !q8.id.equals(qq8.id);
+  }
+
+  @Override
+  public int compareTo(Bet bet) {
+    return bet.getPoints() - getPoints();
   }
 }
