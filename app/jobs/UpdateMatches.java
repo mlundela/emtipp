@@ -39,11 +39,11 @@ public class UpdateMatches extends Job {
         Team homeTeam = Team.find("name = ?", homeTeamName).first();
         Team awayTeam = Team.find("name = ?", awayTeamName).first();
         Match match = Match.find("homeTeam = ? and awayTeam = ?", homeTeam, awayTeam).first();
-        Logger.info("Update match: " + homeTeam + " - " + awayTeam + " " + result);
 
         if (match == null) {
           Logger.error("Could not find match: " + homeTeamName + " - " + awayTeamName);
         } else if (!match.isPlayed) {
+          Logger.info("Update match: " + homeTeam + " - " + awayTeam + " " + result);
           match.isPlayed = true;
           match.homeTeamScore = Integer.valueOf(result.substring(0, 1));
           match.awayTeamScore = Integer.valueOf(result.substring(result.length() - 1, result.length()));
