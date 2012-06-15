@@ -17,6 +17,7 @@ public class UpdateMatches extends Job {
 
     Logger.info("UPDATE MATCHES");
 
+
     Document doc = Jsoup.connect("http://www.altomfotball.no/element.do?cmd=tournament&tournamentId=6270").get();
     Elements elements = doc.select(".sd_fixtures tr");
 
