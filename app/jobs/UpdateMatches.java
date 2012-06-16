@@ -42,7 +42,7 @@ public class UpdateMatches extends Job {
 
         if (match == null) {
           Logger.error("Could not find match: " + homeTeamName + " - " + awayTeamName);
-        } else if (!match.isPlayed) {
+        } else {
           Logger.info("Update match: " + homeTeam + " - " + awayTeam + " " + result);
           match.isPlayed = true;
           match.homeTeamScore = Integer.valueOf(result.substring(0, 1));
