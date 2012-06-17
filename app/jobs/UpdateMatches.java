@@ -7,10 +7,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import play.Logger;
-import play.jobs.Every;
 import play.jobs.Job;
+import play.jobs.On;
 
-@Every("2min")
+@On("0 0/5 16-23 * * ?")
 public class UpdateMatches extends Job {
 
   public void doJob() throws Exception {
