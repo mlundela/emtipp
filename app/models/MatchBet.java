@@ -26,10 +26,23 @@ public class MatchBet extends Model implements Comparable<MatchBet> {
     }
     if (homeTeamScore == match.homeTeamScore && awayTeamScore == match.awayTeamScore) {
       return 3;
-    } else if (homeTeamScore == match.homeTeamScore || awayTeamScore == match.awayTeamScore) {
+    } else if (riktigTegn()) {
       return 1;
     }
     return 0;
+  }
+
+  private boolean riktigTegn() {
+    if (homeTeamScore > awayTeamScore && match.homeTeamScore > match.awayTeamScore) {
+      return true;
+    }
+    if (homeTeamScore < awayTeamScore && match.homeTeamScore < match.awayTeamScore) {
+      return true;
+    }
+    if (homeTeamScore == awayTeamScore && match.homeTeamScore == match.awayTeamScore) {
+      return true;
+    }
+    return false;
   }
 
   @Override

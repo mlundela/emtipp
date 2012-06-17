@@ -19,7 +19,7 @@
 
             <table class="bets_table table table-bordered">
             #{list items:bet.matchBetsSorted(), as:'matchBet' }
-                <tr>
+                <tr class="points_${matchBet.score}">
                     <td class="teamColumn" valign="top">
                         <span class="floatRight">${matchBet.match.homeTeam.name}</span>
                         <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
@@ -42,34 +42,34 @@
         </td>
         <td width="40px"></td>
 
-        <td width="260px" valign="top">
+    *{<td width="260px" valign="top">}*
 
 
-            <table>
-            #{list items:bet.tables, as:'group' }
-                <tr>
-                    <td>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th colspan="4">
-                                    Gruppe ${group.name}
-                                </th>
-                            </tr>
-                            #{list items:group.table(), as:'team'}
-                                <tr>
-                                    <td width="120px">${team.name}</td>
-                                    <td>${team.goalsScored}</td>
-                                    <td>${team.goalsConceded}</td>
-                                    <td>${team.points}</td>
-                                </tr>
-                            #{/list}
-                        </table>
-                    </td>
-                </tr>
-            #{/list}
-            </table>
+    *{<table>}*
+    *{#{list items:bet.tables, as:'group' }}*
+    *{<tr>}*
+    *{<td>}*
+    *{<table class="table table-bordered">}*
+    *{<tr>}*
+    *{<th colspan="4">}*
+    *{Gruppe ${group.name}}*
+    *{</th>}*
+    *{</tr>}*
+    *{#{list items:group.table(), as:'team'}}*
+    *{<tr>}*
+    *{<td width="120px">${team.name}</td>}*
+    *{<td>${team.goalsScored}</td>}*
+    *{<td>${team.goalsConceded}</td>}*
+    *{<td>${team.points}</td>}*
+    *{</tr>}*
+    *{#{/list}}*
+    *{</table>}*
+    *{</td>}*
+    *{</tr>}*
+    *{#{/list}}*
+    *{</table>}*
 
-        </td>
+    *{</td>}*
         <td valign="top">
 
             <h3>Toppskårer</h3>
