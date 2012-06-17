@@ -30,6 +30,19 @@
             <p>
                 NB! Poenga i dei to første kampane vil ikkje telje i samandraget.
             </p>
+            <br/>
+
+            <h3>Poeng</h3>
+            <ul>
+                <li>3 poeng for riktig resultat</li>
+                <li>1 poeng for riktig markering</li>
+                <li>1 poeng pr riktig lag i kvartfinale</li>
+                <li>2 poeng pr riktig lag i semi</li>
+                <li>4 poeng pr riktig finalist</li>
+                <li>10 poeng for riktig finalevinner</li>
+                <li>10 poeng for riktig toppskårer</li>
+                <li>10 poeng for riktig assist-konge</li>
+            </ul>
 
         </td>
 
@@ -81,85 +94,66 @@
                         <p>${bet.topAssist}</p>
 
                         <h3>Finaler</h3>
-
                         <br/>
-                        <table>
 
-
+                        <table class="table table-bordered">
+                            <thead>
                             <tr>
-                                <td width="140px">
-                                    <div>
-                                        <a href="#" class="btn ${aBet.q1.equals(aBet.s1) ? 'btn-success' : ''}"
-                                           id="q1">${aBet.q1.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.q2.equals(aBet.s1) ? 'btn-success' : ''}"
-                                           id="q2">${aBet.q2.name}</a>
-                                    </div>
-                                    <br/>
-                                    <br/>
-
-                                    <div>
-                                        <a href="#" class="btn ${aBet.q3.equals(aBet.s3) ? 'btn-success' : ''}"
-                                           id="q3">${aBet.q3.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.q4.equals(aBet.s3) ? 'btn-success' : ''}"
-                                           id="q4">${aBet.q4.name}</a>
-                                    </div>
-                                    <br/>
-                                    <br/>
-
-                                    <div>
-                                        <a href="#" class="btn ${aBet.q5.equals(aBet.s2) ? 'btn-success' : ''}"
-                                           id="q5">${aBet.q5.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.q6.equals(aBet.s2) ? 'btn-success' : ''}"
-                                           id="q6">${aBet.q6.name}</a>
-                                    </div>
-                                    <br/>
-                                    <br/>
-
-                                    <div>
-                                        <a href="#" class="btn ${aBet.q7.equals(aBet.s4) ? 'btn-success' : ''}"
-                                           id="q7">${aBet.q7.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.q8.equals(aBet.s4) ? 'btn-success' : ''}"
-                                           id="q8">${aBet.q8.name}</a>
-                                    </div>
-                                    <br/>
-                                </td>
-                                <td width="140px">
-                                    <div>
-                                        <a href="#" class="btn ${aBet.s1.equals(aBet.f1) ? 'btn-success' : ''}"
-                                           id="s1">${aBet.s1.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.s2.equals(aBet.f1) ? 'btn-success' : ''}"
-                                           id="s2">${aBet.s2.name}</a>
-                                    </div>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-                                    <br/>
-
-                                    <div>
-                                        <a href="#" class="btn ${aBet.s3.equals(aBet.f2) ? 'btn-success' : ''}"
-                                           id="s3">${aBet.s3.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.s4.equals(aBet.f2) ? 'btn-success' : ''}"
-                                           id="s4">${aBet.s4.name}</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div>
-                                        <a href="#" class="btn ${aBet.f1.equals(aBet.winner) ? 'btn-success' : ''}"
-                                           id="f1">${aBet.f1.name}</a>
-                                        <br/>
-                                        <a href="#" class="btn ${aBet.f2.equals(aBet.winner) ? 'btn-success' : ''}"
-                                           id="f2">${aBet.f2.name}</a>
-                                    </div>
-                                </td>
+                                <th>Kvartfinale</th>
+                                <th>Semifinale</th>
+                                <th>Finale</th>
+                                <th>Vinner</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>${aBet.q1.name}</td>
+                                <td>${aBet.s1.name}</td>
+                                <td>${aBet.f1.name}</td>
+                                <td>${aBet.winner.name}</td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q2.name}</td>
+                                <td>${aBet.s2.name}</td>
+                                <td>${aBet.f2.name}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q3.name}</td>
+                                <td>${aBet.s3.name}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q4.name}</td>
+                                <td>${aBet.s4.name}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q5.name}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q6.name}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q7.name}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>${aBet.q8.name}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
-
                     </td>
                 </tr>
             </table>
