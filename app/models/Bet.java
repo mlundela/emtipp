@@ -60,6 +60,12 @@ public class Bet extends Model implements Comparable<Bet> {
     for (MatchBet matchBet : matchBets) {
       out += matchBet.getScore();
     }
+    if (topScorer.isTopScorer()) {
+      out += 10;
+    }
+    if (topAssist.isTopAssist()) {
+      out += 10;
+    }
     return out;
   }
 

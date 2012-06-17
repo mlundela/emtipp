@@ -13,6 +13,9 @@ public class Player extends Model {
   public String nationality;
   public String club;
 
+  public int goals;
+  public int assists;
+
 
   public Player(String name, int playerID, String posision, String nationality, String club) {
     this.playerID = playerID;
@@ -20,12 +23,17 @@ public class Player extends Model {
     this.posision = posision;
     this.nationality = nationality;
     this.club = club;
-    int appearances = 0;
-    int goals = 0;
-    int assists = 0;
-
   }
 
+  public boolean isTopScorer() {
+    Player first = Player.find("order by goals desc").first();
+    return goals == first.goals;
+  }
+
+  public boolean isTopAssist() {
+    Player first = Player.find("order by assists desc").first();
+    return assists == first.assists;
+  }
 
   @Override
   public String toString() {

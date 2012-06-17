@@ -32,7 +32,8 @@ a.btn {
     width: 350px;
 }
 
-.points_3 {
+.points_3,
+.max_points {
     background-color: #c0fab1;
 }
 

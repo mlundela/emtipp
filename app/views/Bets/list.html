@@ -147,13 +147,19 @@
 
                         <br/>
 
-                        <h3>Toppskårer</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Toppskårer</th>
+                                <th>Assist-konge</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td class="${aBet.topScorer.isTopScorer() ? 'max_points' : ''}">${aBet.topScorer.name}</td>
+                                <td class="${aBet.topAssist.isTopAssist() ? 'max_points' : ''}">${aBet.topAssist.name}</td>
+                            </tr>
+                        </table>
 
-                        <p>${aBet.topScorer.name}</p>
-
-                        <h3>Assist-konge</h3>
-
-                        <p>${aBet.topAssist.name}</p>
                     </td>
                 </tr>
             </table>
