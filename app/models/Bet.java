@@ -69,6 +69,18 @@ public class Bet extends Model implements Comparable<Bet> {
     return out;
   }
 
+  public boolean isTopFour() {
+    List<Bet> bets = Bet.findAll();
+    Collections.sort(bets);
+    return getPoints() >= bets.get(3).getPoints();
+  }
+
+  public boolean isTheBest() {
+    List<Bet> bets = Bet.findAll();
+    Collections.sort(bets);
+    return getPoints() == bets.get(0).getPoints();
+  }
+
   public List<MatchBet> matchBetsSorted() {
     Collections.sort(matchBets);
     return matchBets;
