@@ -39,3 +39,7 @@ a.btn {
 .points_1 {
     background-color: #f8faaa;
 }
+
+.ignored {
+    text-decoration: line-through;
+}

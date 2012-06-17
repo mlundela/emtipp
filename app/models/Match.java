@@ -21,6 +21,7 @@ public class Match extends Model {
   public int awayTeamScore = 0;
 
   public boolean isPlayed;
+  public boolean ignore;
 
   public Match(Team homeTeam, Team awayTeam, Group group) {
     this.homeTeam = homeTeam;

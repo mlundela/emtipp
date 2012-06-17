@@ -59,7 +59,7 @@
 
                         <table class="bets_table table table-bordered">
                         #{list items:aBet.matchBetsSorted(), as:'matchBet' }
-                            <tr class="points_${matchBet.score}">
+                            <tr class="points_${matchBet.score} ${matchBet.match.ignore ? 'ignored' : ''}">
                                 <td class="teamColumn" valign="top">
                                     <span class="floatRight">${matchBet.match.homeTeam.name}</span>
                                     <input type="hidden" name="bet.matchBets[${matchBet_index-1}].match.id"
