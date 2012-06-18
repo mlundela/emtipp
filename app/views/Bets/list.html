@@ -20,7 +20,8 @@
                 </tr>
 
             #{list items:bets, as:'bet' }
-                <tr class="${bet.isTopFour() ? bet.isTheBest() ? 'points_3' : 'points_1' : ''}">
+            *{<tr class="${bet.isTopFour() ? bet.isTheBest() ? 'points_3' : 'points_1' : ''}">}*
+                <tr>
                     <td>${bet.getPoints()}</td>
                     <td><a href="@{Bets.listWithBet(bet.id)}">${bet.user.name} - ${bet.winner.name}</a></td>
                 </tr>
