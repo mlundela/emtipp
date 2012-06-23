@@ -66,6 +66,21 @@ public class Bet extends Model implements Comparable<Bet> {
     if (topAssist.isTopAssist()) {
       out += 10;
     }
+    if (q1.ranking.getValue() > 0) out += 1;
+    if (q2.ranking.getValue() > 0) out += 1;
+    if (q3.ranking.getValue() > 0) out += 1;
+    if (q4.ranking.getValue() > 0) out += 1;
+    if (q5.ranking.getValue() > 0) out += 1;
+    if (q6.ranking.getValue() > 0) out += 1;
+    if (q7.ranking.getValue() > 0) out += 1;
+    if (q8.ranking.getValue() > 0) out += 1;
+    if (s1.ranking.getValue() > 1) out += 2;
+    if (s2.ranking.getValue() > 1) out += 2;
+    if (s3.ranking.getValue() > 1) out += 2;
+    if (s4.ranking.getValue() > 1) out += 2;
+    if (f1.ranking.getValue() > 2) out += 4;
+    if (f2.ranking.getValue() > 2) out += 4;
+    if (winner.ranking.getValue() > 3) out += 10;
     return out;
   }
 
